@@ -1,7 +1,8 @@
 /* Drilling down to understand how much money was made during the time period between 2011 and 2012*/
 
 SELECT 
-    SUM(Total)
+    SUM(Total) as 'Total Transaction Amount',
+    Count(*) as 'Number of Transactions'
 
 FROM
     Invoice
