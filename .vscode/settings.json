@@ -1,0 +1,11 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "Sample DB",
+      "database": "${workspaceFolder:SQL}/MySQLProject/WSDA_Music.db"
+    }
+  ],
+  "sqltools.useNodeRuntime": true
+}
