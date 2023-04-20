@@ -2,8 +2,8 @@
 
 /*Get a list of customers who made purchases between 2011 and 2012*/
 
-/*SELECT  
-    c.FirstName || ' ' || c.LastName as 'Customers Who Made a Purchase Between 2011 and 2012',
+SELECT  
+    c.FirstName || ' ' || c.LastName as 'Customers Between 2011 and 2012',
     i.InvoiceDate,
     i.InvoiceId,
     i.Total
@@ -16,14 +16,14 @@ INNER JOIN
 ON i.CustomerId = c.CustomerId
 
 WHERE 
-    DATE(i.InvoiceDate) BETWEEN '2010-12-31' AND '2013-01-01'*/
+    DATE(i.InvoiceDate) BETWEEN '2010-12-31' AND '2013-01-01'
     
 /*Get a list of customers, sales reps, and total transaction amounts for each customer between 2011 and 2012.*/
 
-/*SELECT  
+SELECT  
     c.FirstName || ' ' || c.LastName as 'Customers Who Made a Purchase Between 2011 and 2012',
     e.FirstName || ' ' || e.LastName as 'Employee Support',
-    sum(i.Total)
+    round(sum(i.Total),2) as 'Total in Transactions'
  
     
 FROM
@@ -41,13 +41,13 @@ WHERE
     DATE(i.InvoiceDate) BETWEEN '2010-12-31' AND '2013-01-01'
 
 GROUP BY
-    c.LastName*/
+    c.LastName
 
 
 /*How many transactions are above the average transaction amount during the same time period?*/
 
 --Gets the Average Amount
-/*SELECT
+SELECT
     InvoiceId,
     Total
 
@@ -62,7 +62,7 @@ FROM
     Invoice 
 
 WHERE 
-    DATE(InvoiceDate) BETWEEN '2010-12-31' AND '2013-01-01') < Total*/
+    DATE(InvoiceDate) BETWEEN '2010-12-31' AND '2013-01-01') < Total
 
 
 --After running this query, I noticed Invoice 413 has a total of 1000.86 which is interesting because it does not show
@@ -71,11 +71,12 @@ WHERE
 -- What is the average transaction amount for each year that WSDA Music has been in business?
 
 SELECT
-    YEAR(InvoiceDate) as 'Year',
-    AVG(Total) as 'Average'
+    strftime('%Y',InvoiceDate) as 'Year',
+    '$'||round(AVG(Total),2) as 'Average'
     
 FROM
     Invoice 
 
 GROUP BY
-    year(InvoiceDate)
+    strftime('%Y',InvoiceDate)
+
